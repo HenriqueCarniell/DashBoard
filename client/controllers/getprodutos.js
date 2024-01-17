@@ -1,7 +1,7 @@
 const db = require('../db/db');
 
 exports.get = (req,res) => {
-    const sql = 'select * from produto';
+    const sql = 'SELECT * FROM Produto';
 
     db.query(sql, (err, result) => {
         if(err) {

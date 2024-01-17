@@ -1,15 +1,18 @@
 // States
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 // Cores e elementos do bootstrap
-import { Button, Alert } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import MyVerticallyCenteredModal from '../modal/modal';
+
+// Redux
 
 // axios
 import axios from 'axios';
 
 // CSS
 import './produtos.css';
+import { useSelector } from 'react-redux';
 
 interface Data {
   idProduto: number;
@@ -37,6 +40,25 @@ function Produtos() {
       });
   }, []);
 
+  let Delete = (id:number) => {
+    axios.delete(`http://localhost:4000/delete/${id}`)
+    .then(response => {
+      setData(data.filter(dados => dados.idProduto !== id));
+    }
+    ) .catch((erro) => {
+      console.log(erro);
+    })
+  }
+
+  let Update = () => {
+
+  }
+
+  const currentError = useSelector((state: any) => state.ErrorReducer);
+  console.log(currentError);
+  
+  const errorMessage: string | undefined = currentError?.currentError?.error?.message;
+
   return (
     <div id="container-produtos">
       <div id='div-lupa-prod'>
@@ -59,6 +81,11 @@ function Produtos() {
           </Button>
         </div>
       </div>
+
+      {/* {errorMessage && <p>Error: {"Algo deu errado tente novamente"}</p>} */}
+
+
+
 
       <div id='div-list'>
         <table>
@@ -86,12 +113,12 @@ function Produtos() {
                 <td>{itens.preco_Promocional}</td>
                 <td>{itens.Tag}</td>
                 <td>
-                    <Button variant='danger'>
-                        Editar
+                    <Button variant='danger' onClick={() => Delete(itens.idProduto)}>
+                        excluir
                     </Button>
                 </td>
                 <td>
-                    <Button variant='secondary'>
+                    <Button variant='secondary' onClick={Update}>
                         Editar
                     </Button>
                 </td>

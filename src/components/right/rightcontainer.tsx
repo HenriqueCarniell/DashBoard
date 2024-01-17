@@ -1,6 +1,6 @@
 import Aside from '../aside/aside';
 import Produtos from '../produtos/produtos';
-import './header.css'
+import './rightcontainer.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { TfiAlignJustify } from "react-icons/tfi";

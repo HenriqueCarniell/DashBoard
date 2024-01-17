@@ -1,7 +1,6 @@
 // Bibliotecas do React
 import { DetailedHTMLProps, HTMLAttributes, RefObject, ReactNode, ChangeEvent } from 'react';
 
-
 // React Icons
 import { Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
@@ -17,6 +16,9 @@ import { useState } from 'react';
 // Axios
 import axios from 'axios';
 
+// Redux
+import { useDispatch } from 'react-redux';
+
 function MyVerticallyCenteredModal(props: JSX.IntrinsicAttributes & Omit<Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "ref"> & { ref?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined; }, BsPrefixProps<"div"> & ModalProps> & BsPrefixProps<"div"> & ModalProps & { children?: ReactNode; }) {
     const [SaveNome, SetNome] = useState<string>('');
     const [SaveDesc, SetDesc] = useState<string>('');
@@ -28,32 +30,33 @@ function MyVerticallyCenteredModal(props: JSX.IntrinsicAttributes & Omit<Omit<De
 
     const [error, setError] = useState<any>('');
 
-    let HandleSaveName = (e: ChangeEvent<HTMLInputElement>) => {
+
+    let HandleSaveName = (e: ChangeEvent<HTMLInputElement>):void => {
         SetNome(e.target.value)
     }
 
-    let HandleSaveDesc = (e: ChangeEvent<HTMLInputElement>) => {
+    let HandleSaveDesc = (e: ChangeEvent<HTMLInputElement>):void => {
         SetDesc(e.target.value)
     }
 
-    let HandleSaveCat = (e: ChangeEvent<HTMLSelectElement>) => {
+    let HandleSaveCat = (e: ChangeEvent<HTMLSelectElement>):void => {
         SetCat(e.target.value)
     }
 
-    let HandleSaveLocal = (e: ChangeEvent<HTMLSelectElement>) => {
+    let HandleSaveLocal = (e: ChangeEvent<HTMLSelectElement>):void => {
         SetLocal(e.target.value)
     }
 
-    let HandleSavePreco = (e: ChangeEvent<HTMLInputElement>) => {
+    let HandleSavePreco = (e: ChangeEvent<HTMLInputElement>):void => {
         SetPreco(Number(e.target.value));
     }
 
-    let HandleSavePromo = (e: ChangeEvent<HTMLInputElement>) => {
+    let HandleSavePromo = (e: ChangeEvent<HTMLInputElement>):void => {
         SetPromo(Number(e.target.value));
     }
 
 
-    let HandleSavetag = (e: ChangeEvent<HTMLInputElement>) => {
+    let HandleSavetag = (e: ChangeEvent<HTMLInputElement>):void => {
         SetTag(e.target.value)
     }
 
@@ -70,11 +73,14 @@ function MyVerticallyCenteredModal(props: JSX.IntrinsicAttributes & Omit<Omit<De
             })
 
             console.log(response.data);
-        } catch (err) {
-            setError(err)
+        } catch (error) {
+            dispatch({
+                type: "error/user",
+                payload: { error }
+            })
         }
-    }
-
+    }  
+    const dispatch = useDispatch();
 
     return (
         <Modal
@@ -164,9 +170,9 @@ function MyVerticallyCenteredModal(props: JSX.IntrinsicAttributes & Omit<Omit<De
                     aria-describedby="passwordHelpBlock"
                 />
 
-        </Modal.Body>
+            </Modal.Body>
             <Modal.Footer>
-                <Button variant='dark' onClick={() => { HandleSaveData(); if (props.onHide) props.onHide();}}>Enviar</Button>
+                <Button variant='dark' onClick={() => { HandleSaveData(); if (props.onHide) props.onHide(); window.location.reload()}}>Enviar</Button>
             </Modal.Footer>
         </Modal>
 

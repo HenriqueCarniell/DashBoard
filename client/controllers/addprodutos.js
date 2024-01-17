@@ -1,3 +1,5 @@
+const db = require('../db/db');
+
 exports.add = (req, res) => {
     const { Nome } = req.body;
     const { Descricao } = req.body;
@@ -6,6 +8,8 @@ exports.add = (req, res) => {
     const { Preco } = req.body;
     const { Promo } = req.body;
     const { Tag } = req.body;
+
+    const sql = "INSERT INTO Produto(Nome, Descricao, Categoria, Localização_Na_Pagina, preco, preco_Promocional, Tag) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     db.query(sql, [Nome, Descricao, Categoria, Local, Preco, Promo, Tag], (err, result) => {
         if (err) {

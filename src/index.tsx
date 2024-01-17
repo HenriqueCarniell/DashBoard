@@ -4,19 +4,24 @@ import reportWebVitals from './reportWebVitals';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import RightContainer from './components/right/header';
-import Produtos from './components/produtos/produtos';
+import RightContainer from './components/right/rightcontainer';
+
+//Provider React
+import { Provider } from 'react-redux';
+import store from './components/redux/store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
+    <Provider store={store}>
     <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<RightContainer />}></Route>
-      </Routes>
-    </BrowserRouter>
+        <Routes>
+          <Route path='/' element={<RightContainer />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );
 
