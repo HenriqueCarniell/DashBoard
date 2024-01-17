@@ -85,7 +85,6 @@ function UpdateModalProduct(props: JSX.IntrinsicAttributes & Omit<Omit<DetailedH
         }
     }
 
-
     return (
         <Modal
             {...props}

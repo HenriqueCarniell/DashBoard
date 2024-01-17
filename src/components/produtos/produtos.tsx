@@ -61,6 +61,7 @@ function Produtos() {
 
   return (
     <div id="container-produtos">
+      
       <div id='div-lupa-prod'>
         <div>
           <h1>Produtos</h1>
