@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react';
 
 // Cores e elementos do bootstrap
 import { Button } from 'react-bootstrap';
-import MyVerticallyCenteredModal from '../modal/modal';
+import AddProductModal from '../modal/addproductmodal/modal';
+import UpdateModalProduct from '../modal/updateproductmodal/updatemodal';
 
 // Redux
 
@@ -26,7 +27,10 @@ interface Data {
 }
 
 function Produtos() {
-  const [modalShow, setModalShow] = useState<boolean>(false);
+  const [modalShowAdd, setModalShowAdd] = useState<boolean>(false);
+
+  const [modalShowUpdate, setModalShowUpdate] = useState<boolean>(false);
+
   const [data, setData] = useState<Data[]>([]);
 
 
@@ -40,23 +44,19 @@ function Produtos() {
       });
   }, []);
 
-  let Delete = (id:number) => {
+  let Delete = (id: number) => {
     axios.delete(`http://localhost:4000/delete/${id}`)
-    .then(response => {
-      setData(data.filter(dados => dados.idProduto !== id));
-    }
-    ) .catch((erro) => {
-      console.log(erro);
-    })
-  }
-
-  let Update = () => {
-
+      .then(() => {
+        setData(data.filter(dados => dados.idProduto !== id));
+      }
+      ).catch((erro) => {
+        console.log(erro);
+      })
   }
 
   const currentError = useSelector((state: any) => state.ErrorReducer);
   console.log(currentError);
-  
+
   const errorMessage: string | undefined = currentError?.currentError?.error?.message;
 
   return (
@@ -76,7 +76,7 @@ function Produtos() {
           <h1>Produtos Cadastrados</h1>
         </div>
         <div>
-          <Button variant="dark" onClick={() => setModalShow(true)}>
+          <Button variant="dark" onClick={() => setModalShowAdd(true)}>
             Adicionar Produtos
           </Button>
         </div>
@@ -113,24 +113,31 @@ function Produtos() {
                 <td>{itens.preco_Promocional}</td>
                 <td>{itens.Tag}</td>
                 <td>
-                    <Button variant='danger' onClick={() => Delete(itens.idProduto)}>
-                        excluir
-                    </Button>
+                  <Button variant='danger' onClick={() => Delete(itens.idProduto)}>
+                    excluir
+                  </Button>
                 </td>
                 <td>
-                    <Button variant='secondary' onClick={Update}>
-                        Editar
-                    </Button>
+                  <Button variant="primary" onClick={() => setModalShowUpdate(true)}>
+                    Editar
+                  </Button>
+
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <MyVerticallyCenteredModal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
+      <AddProductModal
+        show={modalShowAdd}
+        onHide={() => setModalShowAdd(false)}
       />
+
+      <UpdateModalProduct
+        show={modalShowUpdate}
+        onHide={() => setModalShowUpdate(false)}
+      />
+
     </div>
   );
 }

@@ -19,7 +19,7 @@ import axios from 'axios';
 // Redux
 import { useDispatch } from 'react-redux';
 
-function MyVerticallyCenteredModal(props: JSX.IntrinsicAttributes & Omit<Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "ref"> & { ref?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined; }, BsPrefixProps<"div"> & ModalProps> & BsPrefixProps<"div"> & ModalProps & { children?: ReactNode; }) {
+function AddProductModal(props: JSX.IntrinsicAttributes & Omit<Omit<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "ref"> & { ref?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null | undefined; }, BsPrefixProps<"div"> & ModalProps> & BsPrefixProps<"div"> & ModalProps & { children?: ReactNode; }) {
     const [SaveNome, SetNome] = useState<string>('');
     const [SaveDesc, SetDesc] = useState<string>('');
     const [SaveCategoria, SetCat] = useState<string>('');
@@ -27,8 +27,6 @@ function MyVerticallyCenteredModal(props: JSX.IntrinsicAttributes & Omit<Omit<De
     const [SavePreco, SetPreco] = useState<number>(0);
     const [SavePromo, SetPromo] = useState<number>(0);
     const [SaveTag, SetTag] = useState<string>('');
-
-    const [error, setError] = useState<any>('');
 
 
     let HandleSaveName = (e: ChangeEvent<HTMLInputElement>):void => {
@@ -179,4 +177,4 @@ function MyVerticallyCenteredModal(props: JSX.IntrinsicAttributes & Omit<Omit<De
     );
 }
 
-export default MyVerticallyCenteredModal;
+export default AddProductModal;

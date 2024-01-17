@@ -9,6 +9,7 @@ import RightContainer from './components/right/rightcontainer';
 //Provider React
 import { Provider } from 'react-redux';
 import store from './components/redux/store';
+import Aside from './components/aside/aside';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -18,7 +19,8 @@ root.render(
     <Provider store={store}>
     <BrowserRouter>
         <Routes>
-          <Route path='/' element={<RightContainer />}></Route>
+          <Route path='/Produtos' element={<RightContainer />}></Route>
+          <Route path='/' element={<Aside />}></Route>
         </Routes>
       </BrowserRouter>
     </Provider>
