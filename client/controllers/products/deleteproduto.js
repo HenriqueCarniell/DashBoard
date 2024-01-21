@@ -1,4 +1,4 @@
-const db = require('../db/db')
+const db = require('../../db/db')
 
 exports.delete = (req, res) => {
     const {id} = req.params;

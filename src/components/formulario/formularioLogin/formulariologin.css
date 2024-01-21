@@ -1,0 +1,24 @@
+#container-formulario-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#container-formulario-login form{
+    width: 30%;
+    background-color: #FFFFFF; /* Cor de fundo branca */
+    border: 1px solid #D3D3D3; /* Borda cinza clara */
+    padding: 50px;
+    border-radius: 10px;
+}
+
+#div-botao-login {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+#div-botao-login button{
+    width: 90%;
+}

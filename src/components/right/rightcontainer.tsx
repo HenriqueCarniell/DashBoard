@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { TfiAlignJustify } from "react-icons/tfi";
 
 import { useState } from 'react';
+import Header from '../header/header';
 
 function RightContainer() {
     const [onSide, seton] = useState<boolean>(false);
@@ -27,6 +28,7 @@ function RightContainer() {
                         <TfiAlignJustify size={32}/>
                         </button>
                     </div>
+                    <Header/>
                 </div>
 
 

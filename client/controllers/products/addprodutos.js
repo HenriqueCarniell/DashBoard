@@ -1,4 +1,4 @@
-const db = require('../db/db');
+const db = require('../../db/db');
 
 exports.add = (req, res) => {
     const { Nome } = req.body;

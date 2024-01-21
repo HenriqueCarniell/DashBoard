@@ -1,0 +1,9 @@
+#ul-login {
+    list-style-type: none; /* Remove os pontos */
+  }
+  
+  #ul-login li a {
+    color: black; /* Muda a cor para preto */
+    text-decoration: none; /* Remove o sublinhado */
+  }
+  

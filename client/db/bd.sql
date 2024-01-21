@@ -1,4 +1,4 @@
--- Active: 1699613985739@@127.0.0.1@3306@dashboard
+-- Active: 1705842483257@@127.0.0.1@3306@dashboard
 
 show databases;
 
@@ -19,9 +19,24 @@ create table Produto (
     'Barra de Pesquisa', 'Seção Recomendado Para Você'),
     preco float(10,2),
     preco_Promocional FLOAT(10,2),
-    Tag VARCHAR(10)
+    Tag VARCHAR(10),
+    id_usuario int
 );
 
-select * from produto;
+DROP TABLE Usuario;
 
-delete from produto;
+create table Usuario (
+    idUsuario int PRIMARY KEY AUTO_INCREMENT,
+    Nome VARCHAR(30) NOT NULL,
+    EMAIL VARCHAR(30) NOT NULL,
+    SENHA VARCHAR(30) NOT NULL
+);
+
+ALTER TABLE Produto
+ADD CONSTRAINT fk_usuario
+FOREIGN KEY (id_usuario) REFERENCES Usuario(idUsuario);
+
+SELECT * from `Usuario`;
+
+select * from `Produto`;
+

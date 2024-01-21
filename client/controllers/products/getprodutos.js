@@ -1,4 +1,4 @@
-const db = require('../db/db');
+const db = require('../../db/db');
 
 exports.get = (req,res) => {
     const sql = 'SELECT * FROM Produto';
