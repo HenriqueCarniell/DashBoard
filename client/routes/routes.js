@@ -7,7 +7,8 @@ const addcontroller = require('../controllers/products/addprodutos');
 const getcontroller = require('../controllers/products/getprodutos');
 const deletecontroller = require('../controllers/products/deleteproduto');
 const updatecontroller = require("../controllers/products/updatecontroller");
-const AddUserController = require("../controllers/users/addusercontroller")
+const AddUserController = require("../controllers/users/addusercontroller");
+const LoginUserController = require("../controllers/users/loginusercontroller")
 
 // Produtos
 
@@ -22,6 +23,8 @@ Router.put("/update/:id", updatecontroller.update);
 // Users
 
 Router.post("/add/user/cadastro", AddUserController.adduser);
+
+Router.post("/send/login/user", LoginUserController.login)
 
 
 module.exports = Router;

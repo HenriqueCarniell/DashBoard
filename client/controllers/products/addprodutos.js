@@ -1,6 +1,6 @@
 const db = require('../../db/db');
 
-exports.add = (req, res) => {
+exports.add = async (req, res) => {
     const { Nome } = req.body;
     const { Descricao } = req.body;
     const { Categoria } = req.body;
