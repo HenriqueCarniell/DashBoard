@@ -5,16 +5,12 @@ import Form from 'react-bootstrap/Form';
 import { ChangeEvent, useEffect, useState } from 'react';
 import axios from 'axios';
 
-import { useNavigate } from 'react-router-dom';
-
 function FormLogin() {
     const [SaveLoginEmail, SetLoginEmail] = useState<string>("");
     const [SaveLoginPassword, SetLoginPassword] = useState<string>("");
 
     const [SaveError, SetError] = useState<string>("");
     const [SaveUserOk, SetUserOK] = useState<string>("");
-
-    const navigate = useNavigate();
 
     let HandleSaveLoginEmail = (e: ChangeEvent<HTMLInputElement>):void => {
         SetLoginEmail(e.target.value)
@@ -30,15 +26,21 @@ function FormLogin() {
             CurrentPasswordUser: SaveLoginPassword
         })
         .then(response => {
-            console.log(response);
+            console.log(response.data.userOk);
             SetUserOK(response.data.userOk);
-            if(response.data.userOk === "Usuario encontrado") {
-                navigate("/Produtos");
-            }
         })
         .catch(err => {
-            console.log(err.response.data.msg)
-            SetError(err.response.data.msg);
+            console.log(err);
+            if (err.response) {
+                // O servidor retornou uma resposta de erro
+                if (err.response.data.userOk) {
+                    SetUserOK(err.response.data.userOk);
+                    window.location.href = "/Produtos";
+                } else if (err.response.data.msg) {
+                    // A propriedade msg existe na resposta
+                    SetError(err.response.data.msg);
+                }
+            }
         });
     }
 
