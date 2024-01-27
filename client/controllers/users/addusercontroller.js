@@ -10,14 +10,15 @@ exports.adduser = (req,res) => {
 
         db.query(sql, [UserEmail], (err,result) => {
             if(result.length > 0) {
-                return res.status(500).json({ error: 'Email já cadastrado' });
-            }
+                return res.status(401).json({ error: 'Email já cadastrado' });
+            } else {
             InsertUser();
+            }
         })
     }
 
     let InsertUser = async () => {
-        const sql = "insert into Usuario values(?,?,?)";
+        const sql = "insert into Usuario(Nome,EMAIL,SENHA) values(?,?,?)";
 
         db.query(sql,[UserNome,UserEmail,UserSenha], (err,result) => {
             if(err) {

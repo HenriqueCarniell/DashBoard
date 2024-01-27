@@ -13,6 +13,8 @@ function FormCadastrar() {
     const [saveCadEmail, setCadEmail] = useState<string>('');
     const [saveCadSenha, setCadSenha] = useState<string>('');
 
+    const [saveVerifyEmail, setEmailVerify] = useState<string>('');
+
     let HandleSaveNome = (e:ChangeEvent<HTMLInputElement>):void => {
         setCadName(e.target.value);
     }
@@ -31,9 +33,13 @@ function FormCadastrar() {
                 UserNome: saveCadName,
                 UserEmail: saveCadEmail,
                 UserSenha: saveCadSenha
-            })
+            });
+            console.log(response)
         } catch(err) {
-            console.log(err)
+            if (axios.isAxiosError(err) && err.response) {
+                // O servidor retornou uma resposta de erro
+                setEmailVerify(err.response.data.error);
+            }
         }
     }
 
@@ -49,6 +55,10 @@ function FormCadastrar() {
                     <Form.Label>Email: </Form.Label>
                     <Form.Control type="email" placeholder="Digite seu email"  onChange={HandleSaveEmail}/>
                 </Form.Group>
+
+                <div>
+                {saveVerifyEmail}
+                </div>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Senha: </Form.Label>
