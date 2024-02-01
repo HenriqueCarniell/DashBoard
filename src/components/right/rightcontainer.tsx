@@ -17,26 +17,20 @@ function RightContainer() {
 
     return (
         <div id="header-container">
-                {
-                    onSide && <Aside />
-                }
+            {
+                onSide && <Aside />
+            }
 
             <div id='right-container'>
                 <div id='header'>
                     <div>
                         <button onClick={HandleOnAside} id="traços">
-                        <TfiAlignJustify size={32}/>
+                            <TfiAlignJustify size={32} />
                         </button>
                     </div>
-                    <Header/>
+                    <Header />
                 </div>
-
-
-                <div id="div-foto">
-                    <img src="" alt="" />
-                </div>
-
-            <Produtos/>
+                <Produtos />
             </div>
         </div>
     );

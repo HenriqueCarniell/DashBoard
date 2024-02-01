@@ -1,5 +1,5 @@
 // States
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 
 // Cores e elementos do bootstrap
 import { Button } from 'react-bootstrap';
@@ -7,13 +7,13 @@ import AddProductModal from '../modal/addproductmodal/modal';
 import UpdateModalProduct from '../modal/updateproductmodal/updatemodal';
 
 // Redux
+import { useSelector } from 'react-redux';
 
 // axios
 import axios from 'axios';
 
 // CSS
 import './produtos.css';
-import { useSelector } from 'react-redux';
 
 interface Data {
   idProduto: number;
@@ -30,6 +30,8 @@ function Produtos() {
   const [modalShowAdd, setModalShowAdd] = useState<boolean>(false);
 
   const [modalShowUpdate, setModalShowUpdate] = useState<boolean>(false);
+
+  const [saveSearchData, SetSearchData] = useState<string>('');
 
   const [data, setData] = useState<Data[]>([]);
 
@@ -54,6 +56,14 @@ function Produtos() {
       })
   }
 
+  let HandleSearchData = (e: ChangeEvent<HTMLInputElement>) => {
+    SetSearchData(e.target.value)
+  }
+
+  const filteredData = data.filter(item =>
+    item.Nome.toLowerCase().includes(saveSearchData.toLowerCase())
+  );
+
   const currentError = useSelector((state: any) => state.ErrorReducer);
   console.log(currentError);
 
@@ -61,14 +71,13 @@ function Produtos() {
 
   return (
     <div id="container-produtos">
-      
+
       <div id='div-lupa-prod'>
         <div>
           <h1>Produtos</h1>
         </div>
         <div>
-          <input type="text" name="" id="" placeholder='Search for...' />
-          <button>lupa</button>
+          <input type="text" name="" id="" placeholder='Search for...' onChange={HandleSearchData} />
         </div>
       </div>
 
@@ -82,11 +91,6 @@ function Produtos() {
           </Button>
         </div>
       </div>
-
-      {/* {errorMessage && <p>Error: {"Algo deu errado tente novamente"}</p>} */}
-
-
-
 
       <div id='div-list'>
         <table>
@@ -104,7 +108,7 @@ function Produtos() {
             </tr>
           </thead>
           <tbody>
-            {data.map((itens, key) => (
+            {filteredData.map((itens, key) => (
               <tr key={key}>
                 <td>{itens.Nome}</td>
                 <td>{itens.Descricao}</td>
@@ -122,7 +126,6 @@ function Produtos() {
                   <Button variant="primary" onClick={() => setModalShowUpdate(true)}>
                     Editar
                   </Button>
-
                 </td>
               </tr>
             ))}

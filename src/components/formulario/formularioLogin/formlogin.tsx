@@ -32,7 +32,6 @@ function FormLogin() {
         .catch(err => {
             console.log(err);
             if (err.response) {
-                // O servidor retornou uma resposta de erro
                 if (err.response.data.userOk) {
                     SetUserOK(err.response.data.userOk);
                     window.location.href = "/Produtos";

@@ -13,7 +13,7 @@
 }
 
 #right-container {
-    width: 100%;
+    min-width: 78%;
 }
 
 #cadastrar-produto {

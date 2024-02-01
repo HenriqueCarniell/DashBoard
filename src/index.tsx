@@ -14,6 +14,7 @@ import store from './components/redux/store';
 import Aside from './components/aside/aside';
 import FormLogin from './components/formulario/formularioLogin/formlogin';
 import FormCadastrar from './components/formulario/formulariocadastrar/formCadastrar';
+import Produtos from './components/produtos/produtos';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -24,17 +25,9 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route path='/Produtos' element={<RightContainer />}></Route>
-
-          <Route path='/' element={
-          <div>
-            <Aside />
-            <RightContainer />
-          </div>
-        }></Route>
-
           <Route path='/login' element={<FormLogin />}></Route>
-
           <Route path='/criar/conta' element={<FormCadastrar />}></Route>
+          <Route path='/Usuarios' element={<Aside/>}></Route>
         </Routes>
       </BrowserRouter>
     </Provider>
