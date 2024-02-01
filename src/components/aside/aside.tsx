@@ -24,10 +24,6 @@ function Aside() {
                     <div>
                         <p id="general">General</p>
                     </div>
-                    <div>
-                        <IoHome color="white" />
-                        <a href="/" id='home'>Home</a>
-                    </div>
                 </div>
                 <div>
                     <button id="btn-cadastrados" onClick={HandleOnCad}>

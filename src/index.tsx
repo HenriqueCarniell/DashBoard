@@ -24,7 +24,7 @@ root.render(
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
-          <Route path='/Produtos' element={<RightContainer />}></Route>
+          <Route path='/' element={<RightContainer />}></Route>
           <Route path='/login' element={<FormLogin />}></Route>
           <Route path='/criar/conta' element={<FormCadastrar />}></Route>
           <Route path='/Usuarios' element={<Aside/>}></Route>
